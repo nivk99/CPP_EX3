@@ -2,7 +2,7 @@
 # This Makefile can handle any set of cpp and hpp files.
 # To use it, you should put all your cpp and hpp files in the SOURCE_PATH folder.
 
-CXX=clang++9
+CXX=clang++-9
 CXXVERSION=c++2a
 SOURCE_PATH=sources
 OBJECT_PATH=objects
@@ -13,7 +13,6 @@ VALGRIND_FLAGS=-v --leak-check=full --show-leak-kinds=all  --error-exitcode=99
 SOURCES=$(wildcard $(SOURCE_PATH)/*.cpp)
 HEADERS=$(wildcard $(SOURCE_PATH)/*.hpp)
 OBJECTS=$(subst sources/,objects/,$(subst .cpp,.o,$(SOURCES)))
-# OBJECTS=$(subst .cpp,.o,$(SOURCES))
 run: test1 test2 test3
 
 test: TestRunner.o StudentTest1.o StudentTest2.o StudentTest3.o $(OBJECTS) $(OBJECTS)
