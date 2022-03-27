@@ -27,7 +27,6 @@ void Notebook::write(int page, int row, int column, Direction direction, const s
 
     for(const char ch:toWrite)
     {
-         //ch<minInvalidValue||ch>maxInvalidValue||
        if (ch=='~'||ch=='\n'||ch=='\0'||ch=='\r'||ch<minInvalidValue||ch>maxInvalidValue){
       throw runtime_error("Invalid input.\n Do not enter an invalid character.");
     }
@@ -129,7 +128,7 @@ void Notebook::erase( int page, int row, int column, Direction direction, int le
      this->startLine(page,row,direction,lenChar);
      if (row!=0)
      {
-          this->startLine(page,row-1,direction,lenChar);
+         this->startLine(page,row-1,direction,lenChar);
      }
      this->startLine(page,row+1,direction,lenChar);
      for(int i=0;i<lenChar;i++)
