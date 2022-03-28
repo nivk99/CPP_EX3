@@ -2,6 +2,7 @@
 #include "Notebook.hpp"
 #include <stdexcept>
 #include <exception>
+using namespace std;
 using namespace ariel;
 
 
@@ -38,7 +39,7 @@ void Notebook::write(int page, int row, int column, Direction direction, const s
            this->startLine(page,row-1,direction,(int)toWrite.length());
 
     }
-     this->startLine(page,row+1,direction,(int)toWrite.length());
+    this->startLine(page,row+1,direction,(int)toWrite.length());
     if(!this->checkWrite(page,row,column,direction,(int)toWrite.length()))
     {
       throw runtime_error("Invalid input.\n Unable to write because it is written or deleted.");
@@ -160,9 +161,9 @@ void Notebook::show(int page)
     	for (const auto& row: this->_note[page]) 
          {
               cout<<row.first<<"- ";
-              for (const auto& pair: this->_note[page][row.first]) 
+              for(const auto& pair:row.second)
               {
-                   cout<<pair.second;
+                   cout<<pair;
 
               }
               cout<<endl;
@@ -173,7 +174,7 @@ void Notebook::show(int page)
 
 void Notebook::startLine(int page,int row,Direction direction,int len)
 {
-     if (direction==Direction::Horizontal&&this->_note[page][row].empty())
+     if (direction==Direction::Horizontal&&this->_note[page].find(row)==this->_note[page].end())
      {
           for(int i=0;i<__maximum_line_length;i++)
           {
@@ -185,7 +186,7 @@ void Notebook::startLine(int page,int row,Direction direction,int len)
      {
           for(int i=0;i<len;i++)
           {
-               if(this->_note[page][row+i].empty())
+               if(this->_note[page].find(row+i)==this->_note[page].end())
                {
 
                     for(int j=0;j<__maximum_line_length;j++)
